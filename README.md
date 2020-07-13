@@ -77,3 +77,13 @@ GetOrder   | Get single order by the id
 
 Versioning is base on [semver](https://semver.org/). 
 The new version is release by a new tag.
+
+## Licence
+
+This library is distributed under the BSD 3 Licence, see LICENSE for more information.
+
+## Contributing
+
+Author of this library is [Mikołaj Jeziorny](https://mikolaj-jeziorny.pl).
+
+If you want to help with development it - **fork me!**
