@@ -43,7 +43,7 @@ Get order by the id.
 order, err := baseLinker.GetOrder(orderId)
 ```
 
-## Error construction
+## Errors
 
 BaseLinker return field "status" with values: "SUCCESS" or "ERROR".
 When status is "ERROR" then it add fields: "error_message" and "error_code".
