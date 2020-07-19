@@ -2,6 +2,7 @@ package baselinker
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -20,26 +21,38 @@ type GetJournalListParameters struct {
 func (baseLiner *BaseLinker) GetJournal(parameters GetJournalListParameters) ([]Log, Error) {
 	var (
 		response GetJournalListResponse
-		logs     []Log
 	)
+
+	if !isProvidedAtLeastOneParam(parameters) {
+		return response.Logs, NewSimpleError(
+			fmt.Errorf(
+				"Method %s is requiring at least one variable to be not empty",
+				"'getJournalList'",
+			),
+		)
+	}
 
 	requestForm := baseLiner.createRequestForm("getJournalList", parameters)
 	resp, err := http.PostForm(baseLiner.Url, requestForm)
 
 	if nil != err {
-		return logs, NewSimpleError(err)
+		return response.Logs, NewSimpleError(err)
 	}
 
 	defer resp.Body.Close()
 	err = json.NewDecoder(resp.Body).Decode(&response)
 
 	if nil != err {
-		return logs, NewSimpleError(err)
+		return response.Logs, NewSimpleError(err)
 	}
 
 	if !response.IsSuccess() {
-		return logs, response
+		return response.Logs, response
 	}
 
-	return logs, nil
+	return response.Logs, nil
+}
+
+func isProvidedAtLeastOneParam(parameters GetJournalListParameters) bool {
+	return 0 != parameters.OrderId || 0 != parameters.LastId || 0 != len(parameters.Types)
 }
