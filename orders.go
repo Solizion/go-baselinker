@@ -12,12 +12,13 @@ type GetOrdersListResponse struct {
 }
 
 type GetOrdersListParameters struct {
-	Unconfirmed bool `json:"get_unconfirmed_orders"`
-	ConfirmedOn int  `json:"date_confirmed_from,omitempty"`
-	FromOn      int  `json:"date_from,omitempty"`
-	FromId      int  `json:"id_from,omitempty"`
-	OrderId     int  `json:"order_id,omitempty"`
-	StatusId    int  `json:"status_id,omitempty"`
+	Unconfirmed   bool   `json:"get_unconfirmed_orders"`
+	ConfirmedOn   int    `json:"date_confirmed_from,omitempty"`
+	FromOn        int    `json:"date_from,omitempty"`
+	FromId        int    `json:"id_from,omitempty"`
+	OrderId       int    `json:"order_id,omitempty"`
+	StatusId      int    `json:"status_id,omitempty"`
+	FilterByEmail string `json:"filter_email,omitempty"`
 }
 
 // Documentation: https://api.baselinker.com/index.php?method=getOrders
