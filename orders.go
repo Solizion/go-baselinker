@@ -24,38 +24,43 @@ type GetOrdersListParameters struct {
 func (baseLiner *BaseLinker) GetOrders(parameters GetOrdersListParameters) ([]Order, Error) {
 	var (
 		response GetOrdersListResponse
-		orders   []Order
 	)
 
 	formData := baseLiner.createRequestForm("getOrders", parameters)
 	resp, err := http.PostForm(baseLiner.Url, formData)
 
 	if nil != err {
-		return orders, NewSimpleError(err)
+		return response.Orders, NewSimpleError(err)
 	}
 
 	defer resp.Body.Close()
 	err = json.NewDecoder(resp.Body).Decode(&response)
 
 	if nil != err {
-		return orders, NewSimpleError(err)
+		return response.Orders, NewSimpleError(err)
 	}
 
 	if !response.IsSuccess() {
-		return orders, response
+		return response.Orders, response
 	}
 
-	return orders, nil
+	return response.Orders, nil
 }
 
-func (baseLiner *BaseLinker) GetOrder(orderId int) (Order, error) {
-	orders, err := baseLiner.GetOrders(GetOrdersListParameters{OrderId: orderId})
+func (baseLiner *BaseLinker) GetOrder(orderId int, unconfirmed bool) (Order, Error) {
+	orders, err := baseLiner.GetOrders(
+		GetOrdersListParameters{
+			Unconfirmed: unconfirmed,
+			OrderId:     orderId,
+		},
+	)
+
 	if nil != err {
 		return Order{}, err
 	}
 
 	if len(orders) == 0 {
-		return Order{}, NewSimpleError(fmt.Errorf("Order %d not found", orderId))
+		return Order{}, NewSimpleError(fmt.Errorf("Order with id: %d not found", orderId))
 	}
 
 	return orders[0], nil
