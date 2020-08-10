@@ -30,8 +30,8 @@ Get logs kind of "create new order", "change order status" from the journal.
 ```go
 journalListParameters := baselinker.GetJournalListParameters{
     Types: []int{
-        baselinker.LogTypeCreateNewOrder, 
-        baselinker.LogTypeChangeOrderStatus
+        baselinker.JournalLogTypeOrderCreate, 
+        baselinker.JournalLogTypeOrderStatusChange
     },
 }
 logs, err := baseLinker.GetJournal(journalListParameters)

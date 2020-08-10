@@ -2,12 +2,14 @@ package baselinker
 
 import (
 	"encoding/json"
+	"github.com/go-playground/validator/v10"
 	"net/url"
 )
 
 type BaseLinker struct {
-	Url   string
-	Token string
+	Url       string
+	Token     string
+	validator *validator.Validate
 }
 
 type BaseResponse struct {
@@ -29,7 +31,10 @@ func (baseLinkerResponse *BaseResponse) CodeError() string {
 }
 
 func NewBaseLinker(url string, token string) *BaseLinker {
-	return &BaseLinker{Url: url, Token: token}
+	baseLinker := &BaseLinker{Url: url, Token: token, validator: validator.New()}
+	baseLinker.registerValidationMethods()
+
+	return baseLinker
 }
 
 func (baseLiner *BaseLinker) createRequestForm(method string, parameters interface{}) url.Values {

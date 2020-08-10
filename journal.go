@@ -2,7 +2,7 @@ package baselinker
 
 import (
 	"encoding/json"
-	"fmt"
+	"github.com/go-playground/validator/v10"
 	"net/http"
 )
 
@@ -14,7 +14,7 @@ type GetJournalListResponse struct {
 type GetJournalListParameters struct {
 	OrderId int   `json:"order_id,omitempty"`
 	LastId  int   `json:"last_log_id,omitempty"`
-	Types   []int `json:"logs_types,omitempty"`
+	Types   []int `json:"logs_types,omitempty" validate:"is-journal-log-types"`
 }
 
 // Documentation: https://api.baselinker.com/index.php?method=getJournalList
@@ -23,13 +23,9 @@ func (baseLiner *BaseLinker) GetJournal(parameters GetJournalListParameters) ([]
 		response GetJournalListResponse
 	)
 
-	if !isProvidedAtLeastOneParam(parameters) {
-		return response.Logs, NewSimpleError(
-			fmt.Errorf(
-				"Method %s is requiring at least one variable to be not empty",
-				"'getJournalList'",
-			),
-		)
+	err := baseLiner.validator.Struct(parameters)
+	if nil != err {
+		return response.Logs, NewSimpleError(err)
 	}
 
 	requestForm := baseLiner.createRequestForm("getJournalList", parameters)
@@ -53,6 +49,18 @@ func (baseLiner *BaseLinker) GetJournal(parameters GetJournalListParameters) ([]
 	return response.Logs, nil
 }
 
-func isProvidedAtLeastOneParam(parameters GetJournalListParameters) bool {
-	return 0 != parameters.OrderId || 0 != parameters.LastId || 0 != len(parameters.Types)
+// TODO check if this validation works with nil value (it must return true)
+func validateJournalTypes(field validator.FieldLevel) bool {
+	slice, ok := field.Field().Interface().([]int)
+	if !ok {
+		return false
+	}
+
+	for _, logType := range slice {
+		if !journalLogTypes.has(logType) {
+			return false
+		}
+	}
+
+	return true
 }
