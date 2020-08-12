@@ -67,11 +67,15 @@ if nil != err {
 
 ## Developed methods 
 
-Name       | Description
----------- | -----------
-GetJournal | Get list of logs
-GetOrders  | Get list of orders
-GetOrder   | Get single order by the id
+Name                | Description
+------------------- | -----------
+GetJournal          | Get list of logs
+GetOrders           | Get list of orders
+GetOrder            | Get single order by id
+GetProductsList     | Get list of products
+GetProduct          | Get single product by id
+GetProductsDetails  | Get list of products (with details)
+GetProductDetail    | Get single product (with details) by id
 
 ## Versioning 
 
