@@ -37,6 +37,12 @@ type Log struct {
 	Date     int `json:"date"`
 }
 
+type Storage struct {
+	StorageId string   `json:"storage_id"`
+	Name      string   `json:"name"`
+	Methods   []string `json:"methods"`
+}
+
 func (order *Order) HasInvoiceNip() bool {
 	return len(order.InvoiceNip) > 10
 }

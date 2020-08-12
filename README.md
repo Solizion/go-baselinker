@@ -76,6 +76,7 @@ GetProductsList     | Get list of products
 GetProduct          | Get single product by id
 GetProductsDetails  | Get list of products (with details)
 GetProductDetail    | Get single product (with details) by id
+GetStorages         | Get list of storages
 
 ## Versioning 
 
