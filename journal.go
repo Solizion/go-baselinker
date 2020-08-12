@@ -6,6 +6,52 @@ import (
 	"net/http"
 )
 
+const (
+	JournalLogTypeOrderCreate                  = 1
+	JournalLogTypeOrderDownloadFod             = 2
+	JournalLogTypeOrderPaid                    = 3
+	JournalLogTypeOrderOrPaymentDocumentDelete = 4
+	JournalLogTypeOrdersMerge                  = 5
+	JournalLogTypeOrdersSeparate               = 6
+	JournalLogTypeOrderToInvoice               = 7
+	JournalLogTypeOrderToRecipt                = 8
+	JournalLogTypeShippmentCreate              = 9
+	JournalLogTypeShippmentDelete              = 10
+	JournalLogTypeShippmentEdit                = 11
+	JournalLogTypeOrderAddProduct              = 12
+	JournalLogTypeOrderEditProduct             = 13
+	JournalLogTypeOrderDeleteProduct           = 14
+	JournalLogTypeBuyerToBlackList             = 15
+	JournalLogTypeOrderEdit                    = 16
+	JournalLogTypeOrderCopy                    = 17
+	JournalLogTypeOrderStatusChange            = 18
+	JournalLogTypeInvoiceDelete                = 19
+	JournalLogTypeReciptDelete                 = 20
+)
+
+var journalLogTypes = intArray{
+	JournalLogTypeOrderCreate,
+	JournalLogTypeOrderDownloadFod,
+	JournalLogTypeOrderPaid,
+	JournalLogTypeOrderOrPaymentDocumentDelete,
+	JournalLogTypeOrdersMerge,
+	JournalLogTypeOrdersSeparate,
+	JournalLogTypeOrderToInvoice,
+	JournalLogTypeOrderToRecipt,
+	JournalLogTypeShippmentCreate,
+	JournalLogTypeShippmentDelete,
+	JournalLogTypeShippmentEdit,
+	JournalLogTypeOrderAddProduct,
+	JournalLogTypeOrderEditProduct,
+	JournalLogTypeOrderDeleteProduct,
+	JournalLogTypeBuyerToBlackList,
+	JournalLogTypeOrderEdit,
+	JournalLogTypeOrderCopy,
+	JournalLogTypeOrderStatusChange,
+	JournalLogTypeInvoiceDelete,
+	JournalLogTypeReciptDelete,
+}
+
 type GetJournalListResponse struct {
 	*BaseResponse
 	Logs []Log `json:"logs"`
