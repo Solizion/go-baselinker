@@ -49,7 +49,6 @@ func (baseLiner *BaseLinker) GetJournal(parameters GetJournalListParameters) ([]
 	return response.Logs, nil
 }
 
-// TODO check if this validation works with nil value (it must return true)
 func validateJournalTypes(field validator.FieldLevel) bool {
 	slice, ok := field.Field().Interface().([]int)
 	if !ok {
