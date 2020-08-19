@@ -78,6 +78,8 @@ GetProductsDetails  | Get list of products (with details)
 GetProductDetail    | Get single product (with details) by id
 GetStorages         | Get list of storages
 GetCategories       | Get list of categories
+AddCategory         | Add new category
+EditCategory        | Edit existing category
 
 ## Versioning 
 

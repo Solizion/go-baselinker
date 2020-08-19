@@ -43,10 +43,23 @@ type Storage struct {
 	Methods []string `json:"methods"`
 }
 
+type BaseCategory struct {
+	Name     string `json:"name" validate:"required"`
+	ParentId int    `json:"parent_id" validate:"required"`
+}
+
+type EditCategory struct {
+	*BaseCategory
+	Id int `json:"category_id" validate:"required"`
+}
+
+type AddCategory struct {
+	*BaseCategory
+}
+
 type Category struct {
-	Id       int    `json:"category_id"`
-	Name     string `json:"name"`
-	ParentId int    `json:"parent_id"`
+	*BaseCategory
+	Id int `json:"category_id,omitempty"`
 }
 
 func (order *Order) HasInvoiceNip() bool {
