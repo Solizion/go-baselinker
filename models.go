@@ -43,6 +43,12 @@ type Storage struct {
 	Methods []string `json:"methods"`
 }
 
+type Category struct {
+	Id       int    `json:"category_id"`
+	Name     string `json:"name"`
+	ParentId int    `json:"parent_id"`
+}
+
 func (order *Order) HasInvoiceNip() bool {
 	return len(order.InvoiceNip) > 10
 }
