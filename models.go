@@ -38,9 +38,9 @@ type Log struct {
 }
 
 type Storage struct {
-	StorageId string   `json:"storage_id"`
-	Name      string   `json:"name"`
-	Methods   []string `json:"methods"`
+	Id      string   `json:"storage_id"`
+	Name    string   `json:"name"`
+	Methods []string `json:"methods"`
 }
 
 func (order *Order) HasInvoiceNip() bool {
