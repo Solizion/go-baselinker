@@ -14,7 +14,7 @@ type GetCategoriesListParameters struct {
 	StorageId string `json:"sotrage_id" validate:"required"`
 }
 
-// Documentation: https://api.baselinker.com/index.php?method=getCGetCategories
+// Documentation: https://api.baselinker.com/index.php?method=getCategories
 func (baseLinker *BaseLinker) GetCategories(parameters GetCategoriesListParameters) ([]Category, Error) {
 	var (
 		response GetCategoriesListResponse
